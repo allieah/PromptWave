@@ -1,9 +1,10 @@
 "use client";
+
 import { useState, useEffect } from "react";
+
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
-  console.log("PromptCardList Data:", data); // Add this log
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (

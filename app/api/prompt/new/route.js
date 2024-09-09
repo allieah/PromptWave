@@ -1,15 +1,13 @@
-import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
-export const POST = async (req) => {
-  const { userID, prompt, tag } = await req.json();
-  //can extract all data
+import { connectToDB } from "@utils/database";
+
+export const POST = async (request) => {
+  const { userId, prompt, tag } = await request.json();
+
   try {
-    await connectToDB(); // we do everytime as it is an lambda fnc(it dies once the job is done)
-    const newPrompt = new Prompt({
-      creator: userID,
-      prompt,
-      tag,
-    });
+    await connectToDB();
+    const newPrompt = new Prompt({ creator: userId, prompt, tag });
+
     await newPrompt.save();
     return new Response(JSON.stringify(newPrompt), { status: 201 });
   } catch (error) {
